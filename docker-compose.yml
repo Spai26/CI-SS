@@ -1,0 +1,43 @@
+services:
+  # Instancia dedicada para PGMQ
+  postgres-pgmq:
+    image: ghcr.io/pgmq/pg18-pgmq:v1.10.0
+    container_name: pgmq-ciudar-db
+    restart: always
+    environment:
+      POSTGRES_DB: DBCUIDAR
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: devpw_2025
+    ports:
+      - "5440:5432" # para que no choque con tu otro Postgres
+    volumes:
+      - pgmq_data_vol:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d DBCUIDAR"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pgmq-net
+
+  # PGAdmin dedicado para este bloque
+  pgadmin-pgmq:
+    image: dpage/pgadmin4:7.8
+    container_name: pgmq-cuidar-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8083:80" # para no chocar con el PGAdmin o Redis
+    depends_on:
+      postgres-pgmq:
+        condition: service_healthy
+    networks:
+      - pgmq-net
+
+volumes:
+  pgmq_data_vol: # Volumen único para este proyecto
+    driver: local
+networks:
+  pgmq-net:
+    driver: bridge

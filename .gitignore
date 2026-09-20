@@ -1,0 +1,127 @@
+# =============================================================================
+# Java / Maven
+# =============================================================================
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+replay_pid*
+
+# Maven wrapper (keep mvnw / mvnw.cmd / .mvn/wrapper/ properties; ignore the .jar)
+.mvn/wrapper/maven-wrapper.jar
+
+# Spring Boot tutorial cruft
+HELP.md
+
+# =============================================================================
+# IDEs
+# =============================================================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse / STS
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache/
+.apt_generated
+bin/
+
+# VS Code (settings.example.json may be committed; settings.json is per-user)
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.example.json
+!.vscode/launch.example.json
+
+# NetBeans
+nb-configuration.xml
+nbproject/
+nbbuild/
+nbdist/
+.nb-gradle/
+build/
+
+# =============================================================================
+# OS / misc
+# =============================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+
+# =============================================================================
+# Secrets / environment - NEVER commit
+# =============================================================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.jks
+secrets/
+credentials/
+config/local.*
+config/local/*
+
+# =============================================================================
+# Logs / temp
+# =============================================================================
+logs/
+*.log
+tmp/
+temp/
+.cache/
+
+# =============================================================================
+# Frontend (when added - placeholder until it lands)
+# =============================================================================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/.cache/
+frontend/.parcel-cache/
+frontend/coverage/
+
+# =============================================================================
+# Test artefacts
+# =============================================================================
+test-output/
+surefire-reports/
+failsafe-reports/
+junit-reports/
+*.html
+!src/main/resources/**/*.html
+!src/test/resources/**/*.html
+
+# =============================================================================
+# Misc build / generated
+# =============================================================================
+*.lst
+.gradle/
+.flattened-pom.xml
+.flattened-pom.xml.asc
+dependency-reduced-pom.xml
+
+# =============================================================================
+# Tool caches (NOT source code — regenerate, never commit)
+# =============================================================================
+# opencode / gentle-ai agent caches
+.atl/
+api/.atl/
+

@@ -1,0 +1,26 @@
+# Auto-detect text files and normalize line endings on commit (no more mixed CRLF/LF)
+# between Windows and macOS/Linux contributors.
+* text=auto eol=lf
+
+# Explicitly force these to LF (jOOQ-generated files, migrations, YAML, scripts).
+*.sql         text eol=lf
+*.yml         text eol=lf
+*.yaml        text eol=lf
+*.json        text eol=lf
+*.sh          text eol=lf
+*.properties  text eol=lf
+
+# CRLF line endings, no conversion (Windows-only tooling, e.g. .bat, PowerShell).
+*.bat         text eol=crlf
+*.cmd         text eol=crlf
+*.ps1         text eol=crlf
+
+# Binary by default.
+*.png         binary
+*.jpg         binary
+*.jpeg        binary
+*.gif         binary
+*.pdf         binary
+*.jar         binary
+*.war         binary
+*.zip         binary

@@ -1,0 +1,36 @@
+# api/.gitignore — kept simple because the root .gitignore covers most cases.
+# Anything not explicitly overridden here is already ignored at the repo root.
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Eclipse / STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Test outputs (root .gitignore covers; here for redundancy if api is ever cloned solo) ###
+test-output/
