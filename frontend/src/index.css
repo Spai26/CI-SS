@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@theme inline {
+  --color-teal: #00B4D8;
+  --color-teal-dark: #0096B4;
+  --color-teal-light: #E0F7FC;
+  --color-coral: #FF7F50;
+  --color-coral-dark: #E66A3D;
+  --color-pearl: #F8F9FA;
+  --color-slate: #64748B;
+  --color-slate-light: #94A3B8;
+  --font-sans: 'Poppins', sans-serif;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #F8F9FA;
+  color: #1E293B;
+}
+
+/* Hide scrollbar by default, show on hover/scroll */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  opacity: 0;
+}
+.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+/* Card hover */
+.caregiver-card {
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.caregiver-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Star rating */
+.star-filled { color: #FBBF24; }
+.star-empty { color: #E2E8F0; }
+
+/* Pill chip filter */
+.filter-chip {
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Modal entry animation */
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid #00B4D8;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions on interactive elements */
+button, a {
+  transition: opacity 0.15s ease, background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}

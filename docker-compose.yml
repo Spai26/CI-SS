@@ -35,6 +35,21 @@ services:
     networks:
       - pgmq-net
 
+  # Frontend (Vite + React)
+  frontend:
+    image: node:22-alpine
+    container_name: cuidar-frontend
+    working_dir: /app
+    environment:
+      - PORT=5173
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - pgmq-net
+
 volumes:
   pgmq_data_vol: # Volumen único para este proyecto
     driver: local
