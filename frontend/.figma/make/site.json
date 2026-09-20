@@ -1,0 +1,10 @@
+{
+  "description": "Connects families with verified senior caregivers through an intuitive, accessible platform featuring detailed profiles and easy filtering options.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -19,6 +19,7 @@ Backend REST para la plataforma **CuidAR** — conecta familias con cuidadores v
 | Validación | Jakarta Bean Validation |
 | Build | Maven |
 | Testing | JUnit 5 + AssertJ + **Testcontainers** (Postgres real) |
+| Frontend | React 19 + Vite + TailwindCSS 4 + React Router |
 
 ---
 
@@ -30,17 +31,18 @@ Backend REST para la plataforma **CuidAR** — conecta familias con cuidadores v
 
 ---
 
-## Levantar la base de datos local
+## Levantar la Infraestructura y el Frontend
 
-Desde la raíz del repo:
+Desde la raíz del repo, levanta Postgres, pgAdmin y el Frontend de React:
 
 ```bash
-docker compose up -d postgres-pgmq
+docker compose up -d
 ```
 
-- Postgres queda en `localhost:5440` · DB `DBCUIDAR` · user `postgres` · pass `devpw_2025`
-- pgAdmin (UI) en `http://localhost:8083` · `admin@admin.com` / `admin`
-- **Las migrations las aplica Flyway al arrancar la app** (no las corrés a mano).
+- **Frontend**: Servido en `http://localhost:5173` (con proxy al backend en `localhost:8080`).
+- **Postgres**: Expuesto en `localhost:5440` · DB `DBCUIDAR` · user `postgres` · pass `devpw_2025`
+- **pgAdmin**: UI en `http://localhost:8083` · `admin@admin.com` / `admin`
+- **Migrations**: Las aplica Flyway al arrancar la app.
 
 ---
 
@@ -184,12 +186,12 @@ Detalle completo en `api/src/main/resources/db/migration/V1__init_schema.sql`.
 
 ## Pendiente / TODO
 
+- [x] Integración inicial del Frontend (Auth, Rutas, Vite).
 - [ ] Conectar a un IdP real para JWT en `prod` (Keycloak, Auth0, etc.). El `HmacJwtService` actual usa un secret HMAC hardcoded solo para dev.
 - [ ] Mover el JWT signing key a variable de entorno (con `JwtProperties`).
-- [ ] Implementar el envío de email real (SMTP) — hoy el token de verificación se devuelve en la cabecera dev.
+- [ ] Implementar el envío de email real (SMTP) — hoy el token de verificación se auto-verifica en desarrollo a través del frontend.
 - [ ] Wire el `InMemoryNotificacionRepository` al jOOQ `notificacion` table (sustituir impl).
 - [ ] Productores/consumidores PGMQ (la cola ya está en docker-compose).
-- [ ] Frontend (vacío por ahora).
 
 ## Endpoints actuales
 
