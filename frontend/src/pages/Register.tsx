@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { apiClient, ApiError } from "../api/client";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ export default function Register() {
     setLoading(true);
 
     try {
+      // Usamos fetch directamente aquí para poder leer los headers (X-Dev-Verification-Token)
       const response = await fetch("/api/v1/auth/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,7 +40,7 @@ export default function Register() {
       // Auto-verificación en entorno de desarrollo
       const devToken = response.headers.get("X-Dev-Verification-Token");
       if (devToken) {
-        await fetch(`/api/v1/auth/verificar-email?token=${devToken}`, { method: "POST" });
+        await apiClient(`/auth/verificar-email?token=${devToken}`, { method: "POST" });
       }
 
       setSuccess(true);
@@ -46,7 +48,7 @@ export default function Register() {
         navigate("/login");
       }, 3000);
     } catch (err: any) {
-      setError(err.message || "Ocurrió un error inesperado");
+      setError(err instanceof Error ? err.message : "Ocurrió un error inesperado");
     } finally {
       setLoading(false);
     }

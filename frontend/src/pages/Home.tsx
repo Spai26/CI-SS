@@ -1,6 +1,8 @@
 import { useState, useMemo, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+
+export type CuidadorResponse = any;
 
 /* ── Types ── */
 type Caregiver = {
@@ -524,6 +526,12 @@ export default function Home() {
                 <span className="text-sm font-medium text-slate-700 ml-4 border-l pl-4 border-slate-200">
                   Hola, {user?.nombre}
                 </span>
+                <Link to="/dashboard-familia" className="text-sm font-medium px-4 py-2 rounded-xl bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors">
+                  Dashboard Familia
+                </Link>
+                <Link to="/dashboard-cuidador" className="text-sm font-medium px-4 py-2 rounded-xl bg-teal-50 text-teal-600 hover:bg-teal-100 transition-colors">
+                  Dashboard Cuidador
+                </Link>
                 <button 
                   onClick={logout}
                   className="text-sm font-medium px-4 py-2 rounded-xl border border-red-100 text-red-500 hover:bg-red-50 transition-colors"
