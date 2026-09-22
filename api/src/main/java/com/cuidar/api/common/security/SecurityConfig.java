@@ -72,14 +72,8 @@ public class SecurityConfig {
     @Bean
     @Profile("dev")
     public JwtDecoder jwtDecoderDev() {
-        return token -> {
-            var now = java.time.Instant.now();
-            return org.springframework.security.oauth2.jwt.Jwt.withTokenValue(token)
-                    .header("alg", "none")
-                    .claim("sub", "dev-user")
-                    .issuedAt(now)
-                    .expiresAt(now.plusSeconds(3600))
-                    .build();
-        };
+        String DEV_SECRET = "dev-secret-dev-secret-dev-secret-dev-secret-dev-secret";
+        javax.crypto.SecretKey key = new javax.crypto.spec.SecretKeySpec(DEV_SECRET.getBytes(), "HmacSHA256");
+        return org.springframework.security.oauth2.jwt.NimbusJwtDecoder.withSecretKey(key).build();
     }
 }
