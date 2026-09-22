@@ -110,7 +110,7 @@ public class Usuario extends TableImpl<UsuarioRecord> {
     /**
      * The column <code>public.usuario.estado</code>.
      */
-    public final TableField<UsuarioRecord, String> ESTADO = createField(DSL.name("estado"), SQLDataType.VARCHAR(20).nullable(false).defaultValue(DSL.field(DSL.raw("'ACTIVO'::character varying"), SQLDataType.VARCHAR)), this, "");
+    public final TableField<UsuarioRecord, String> ESTADO = createField(DSL.name("estado"), SQLDataType.VARCHAR(30).nullable(false).defaultValue(DSL.field(DSL.raw("'ACTIVO'::character varying"), SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>public.usuario.email_verificado</code>.
@@ -373,7 +373,7 @@ public class Usuario extends TableImpl<UsuarioRecord> {
     @Override
     public List<Check<UsuarioRecord>> getChecks() {
         return Arrays.asList(
-            Internal.createCheck(this, DSL.name("usuario_estado_check"), "(((estado)::text = ANY ((ARRAY['ACTIVO'::character varying, 'INACTIVO'::character varying, 'BLOQUEADO'::character varying, 'PENDIENTE_VERIFICACION'::character varying])::text[])))", true)
+            Internal.createCheck(this, DSL.name("usuario_estado_check"), "(((estado)::text = ANY (ARRAY[('ACTIVO'::character varying)::text, ('INACTIVO'::character varying)::text, ('BLOQUEADO'::character varying)::text, ('PENDIENTE_VERIFICACION'::character varying)::text])))", true)
         );
     }
 

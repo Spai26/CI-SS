@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { apiClient, ApiError } from "../api/client";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,22 +17,15 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/v1/auth/login", {
+      const data = await apiClient<any>("/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        throw new Error(errorData?.detail || "Error al iniciar sesión");
-      }
-
-      const data = await response.json();
       login(data.accessToken, data.usuario);
       navigate("/");
     } catch (err: any) {
-      setError(err.message || "Ocurrió un error inesperado");
+      setError(err instanceof ApiError ? err.message : "Ocurrió un error inesperado");
     } finally {
       setLoading(false);
     }

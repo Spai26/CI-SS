@@ -33,10 +33,13 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       port: parseInt(process.env.PORT || '8443'),
       strictPort: true,
-      watch: { ignored: ['**/.figma/**'] },
+      watch: {
+        ignored: ['**/.figma/**'],
+        usePolling: true,
+      },
       proxy: {
         '/api': {
-          target: 'http://host.docker.internal:8080',
+          target: 'http://backend:8080',
           changeOrigin: true,
           secure: false,
         }

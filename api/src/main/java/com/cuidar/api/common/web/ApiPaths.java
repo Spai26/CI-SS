@@ -16,6 +16,7 @@ public final class ApiPaths {
     public static final String AUTH = V1 + "/auth";
     public static final String CUIDADORES = V1 + "/cuidadores";
     public static final String NOTIFICACIONES = V1 + "/notificaciones";
+    public static final String FAMILIAS = V1 + "/familias";
 
     private ApiPaths() {
         // utility class
