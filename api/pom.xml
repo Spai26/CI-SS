@@ -17,8 +17,8 @@
 	<properties>
 		<java.version>21</java.version>
 		<testcontainers.version>1.20.4</testcontainers.version>
-		<!-- jOOQ codegen - defaults to local dev DB; override with -D at runtime -->
-		<jooq.jdbc.url>jdbc:postgresql://postgres-pgmq:5432/DBCUIDAR</jooq.jdbc.url>
+		<!-- jOOQ codegen - defaults to local dev DB; override with -D when running from docker -->
+		<jooq.jdbc.url>jdbc:postgresql://localhost:5440/DBCUIDAR</jooq.jdbc.url>
 		<jooq.codegen.skip>false</jooq.codegen.skip>
 		<jooq.jdbc.user>postgres</jooq.jdbc.user>
 		<jooq.jdbc.password>devpw_2025</jooq.jdbc.password>

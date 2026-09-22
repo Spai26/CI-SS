@@ -9,6 +9,10 @@ import com.cuidar.api.cuidadores.domain.Cuidador;
 import com.cuidar.api.cuidadores.domain.ExperienciaLaboral;
 import com.cuidar.api.cuidadores.service.CuidadorService;
 import org.junit.jupiter.api.BeforeEach;
+<<<<<<< HEAD
+=======
+import org.junit.jupiter.api.Disabled;
+>>>>>>> 186f126 (feat(cuidadores): implement backend modules + frontend + dockerize)
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

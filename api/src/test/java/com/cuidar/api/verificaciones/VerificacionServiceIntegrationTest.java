@@ -65,7 +65,11 @@ class VerificacionServiceIntegrationTest {
             Usuario u2 = new Usuario(null, "cuidador_verif@test.com", "hash", "Cuid", "Test", null, Usuario.ESTADO_ACTIVO, true, null);
             cuidadorUser = usuarioRepository.insert(u2);
             // Empieza en BORRADOR
+<<<<<<< HEAD
             cuidador = cuidadorRepository.insert(new Cuidador(null, cuidadorUser.id(), "Pres", 5, new BigDecimal("20.00"), Cuidador.ESTADO_VERIFICACION_BORRADOR, Cuidador.ESTADO_PUBLICACION_BORRADOR, null, null, null));
+=======
+            cuidador = cuidadorRepository.insert(new Cuidador(null, cuidadorUser.id(), "Pres", 5, new BigDecimal("20.00"), Cuidador.ESTADO_VERIFICACION_NO_VERIFICADO, Cuidador.ESTADO_PUBLICACION_BORRADOR, null, null, null));
+>>>>>>> 186f126 (feat(cuidadores): implement backend modules + frontend + dockerize)
         }
     }
 
