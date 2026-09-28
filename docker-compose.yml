@@ -62,7 +62,7 @@ services:
 
   # Frontend (Vite + React)
   frontend:
-    image: node:22-alpine
+    image: node:22-alpinekf
     container_name: cuidar-frontend
     working_dir: /app
     environment:
