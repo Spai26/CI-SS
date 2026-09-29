@@ -21,7 +21,7 @@ import java.util.List;
  * y listado tanto para familias como para cuidadores.
  * </p>
  *
- * @author Equipo de Desarrollo CI-SS
+ * @author Equipo de Desarrollo CI-SS (Saboya Fulca, Avalos Ibarra, Ccencho Tipismana, Jimenez Sanchez)
  * @version 1.0.0
  * @since 2026
  */

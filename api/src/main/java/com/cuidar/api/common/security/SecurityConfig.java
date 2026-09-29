@@ -29,7 +29,7 @@ import static com.cuidar.api.common.web.ApiPaths.V1;
  *   <li>{@code test}: La seguridad web se deshabilita para las pruebas de integración unitarias.</li>
  * </ul>
  *
- * @author Equipo de Arquitectura y Seguridad CI-SS
+ * @author Equipo de Arquitectura y Seguridad CI-SS 
  * @version 1.1.0
  * @see org.springframework.security.config.annotation.web.builders.HttpSecurity
  */
