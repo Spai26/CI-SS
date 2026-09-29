@@ -13,6 +13,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST que expone las operaciones relacionadas con las reservas de cuidadores.
+ * <p>
+ * Este controlador permite gestionar el ciclo de vida de una reserva,
+ * incluyendo su creación, cambio de estado (aceptación, rechazo, cancelación)
+ * y listado tanto para familias como para cuidadores.
+ * </p>
+ *
+ * @author Equipo de Desarrollo CI-SS
+ * @version 1.0.0
+ * @since 2026
+ */
 @RestController
 @RequestMapping(ApiPaths.V1 + "/reservas")
 public class ReservaController {
@@ -25,6 +37,16 @@ public class ReservaController {
         this.currentUser = currentUser;
     }
 
+    /**
+     * Crea una nueva reserva por parte de un usuario con perfil de Familia.
+     * <p>
+     * Este endpoint captura los detalles solicitados de la reserva, como fechas, modalidad
+     * y el cuidador seleccionado, procesándola y calculando los costos estimados.
+     * </p>
+     *
+     * @param request el objeto con los datos necesarios para crear la reserva, validado automáticamente.
+     * @return un objeto {@link ReservaResponse} que representa la reserva recién creada con sus datos generados.
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ReservaResponse crearReserva(@RequestBody @Valid CrearReservaRequest request) {
@@ -33,6 +55,17 @@ public class ReservaController {
         return mapToResponse(reserva);
     }
 
+    /**
+     * Cambia el estado actual de una reserva existente.
+     * <p>
+     * Típicamente utilizado por cuidadores para ACEPTAR/RECHAZAR, o por familias para CANCELAR
+     * una reserva en curso.
+     * </p>
+     *
+     * @param id el identificador único de la reserva a modificar.
+     * @param request el objeto que contiene el nuevo estado y el motivo (opcional) del cambio.
+     * @return un objeto {@link ReservaResponse} con la reserva actualizada.
+     */
     @PutMapping("/{id}/estado")
     public ReservaResponse cambiarEstado(@PathVariable Long id, @RequestBody @Valid CambiarEstadoReservaRequest request) {
         // En una implementación real, aquí se verificaría que el usuario tenga permisos (sea familia o cuidador involucrado)

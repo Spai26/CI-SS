@@ -17,17 +17,21 @@ import static com.cuidar.api.common.web.ApiPaths.AUTH;
 import static com.cuidar.api.common.web.ApiPaths.V1;
 
 /**
- * Security configuration.
+ * Configuración global de seguridad de la aplicación.
  *
- * <p>Public routes: actuator health/info. Everything under {@code /api/**} requires a JWT.</p>
+ * <p>Define las políticas de acceso para las rutas públicas (como el login o actuator) 
+ * y asegura que todos los endpoints bajo {@code /api/**} requieran autenticación JWT válida.</p>
  *
- * <p>The {@link JwtDecoder} is wired by profile:</p>
+ * <p>El decodificador de tokens ({@link JwtDecoder}) se inyecta según el perfil activo:</p>
  * <ul>
- *   <li>{@code prod}: real decoder backed by the external IdP issuer URI (JWKS is fetched).</li>
- *   <li>{@code dev}: a permissive decoder that accepts any token, so the API boots without a real IdP.
- *       Replace with the real decoder before any integration testing.</li>
- *   <li>{@code test}: security is disabled entirely (see {@code TestSecurityConfig}).</li>
+ *   <li>{@code prod}: Valida firmas y claves remotas contra el Identity Provider (IdP) real usando JWKS.</li>
+ *   <li>{@code dev}: Decodificador permisivo local que usa una llave simétrica compartida para facilitar las pruebas sin IdP.</li>
+ *   <li>{@code test}: La seguridad web se deshabilita para las pruebas de integración unitarias.</li>
  * </ul>
+ *
+ * @author Equipo de Arquitectura y Seguridad CI-SS
+ * @version 1.1.0
+ * @see org.springframework.security.config.annotation.web.builders.HttpSecurity
  */
 @Configuration
 public class SecurityConfig {

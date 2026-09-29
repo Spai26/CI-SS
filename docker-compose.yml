@@ -44,7 +44,7 @@ services:
       - ./api:/app
       - maven_repo:/root/.m2
     ports:
-      - "8080:8080"
+      - "8082:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-pgmq:5432/DBCUIDAR
@@ -62,7 +62,7 @@ services:
 
   # Frontend (Vite + React)
   frontend:
-    image: node:22-alpinekf
+    image: node:22-alpine
     container_name: cuidar-frontend
     working_dir: /app
     environment:
@@ -77,9 +77,26 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  # Javadoc Server (Genera y sirve el HTML)
+  javadoc:
+    image: maven:3.9.6-eclipse-temurin-21
+    container_name: cuidar-javadoc
+    working_dir: /app
+    volumes:
+      - ./api:/app
+      - maven_repo:/root/.m2
+    ports:
+      - "8090:8081"
+    # Genera el javadoc (conectándose a la BD de docker) y levanta un server local estático en el puerto 8081
+    command: sh -c "./mvnw compile javadoc:javadoc -DskipTests -Djooq.jdbc.url=jdbc:postgresql://postgres-pgmq:5432/DBCUIDAR && jwebserver -p 8081 -d /app/target/reports/apidocs -b 0.0.0.0"
+    depends_on:
+      postgres-pgmq:
+        condition: service_healthy
+    networks:
+      - pgmq-net
+
 volumes:
   pgmq_data_vol: # Volumen único para este proyecto
-    driver: local
   maven_repo:
     driver: local
 networks:
